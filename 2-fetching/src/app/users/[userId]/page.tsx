@@ -53,8 +53,8 @@ export default async function UserPage({ params: { userId } }: UserParamsType) {
         height={100}
       />
       <p>{userData.id}</p>
-      <h1>{userData.name}'s Posts</h1>
-      <Suspense fallback={<>User's Posts Loading....</>}>
+      <h1>{userData.name} Posts</h1>
+      <Suspense fallback={<>User Posts Loading....</>}>
         <UserPosts promise={postsPromise} />
       </Suspense>
     </div>
