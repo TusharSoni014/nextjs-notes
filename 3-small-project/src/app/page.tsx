@@ -1,3 +1,7 @@
 export default function Home() {
-  return <main className="">hello world in NEXT.JS !</main>;
+  return (
+    <main className="w-full h-screen flex justify-center items-center">
+      Home page!
+    </main>
+  );
 }

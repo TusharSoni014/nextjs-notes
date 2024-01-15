@@ -6,7 +6,7 @@ export default function page() {
   return (
     <div>
       <Button disabled>
-      <Download strokeWidth={3} />
+        <Download strokeWidth={3} />
         Please wait
       </Button>
     </div>
