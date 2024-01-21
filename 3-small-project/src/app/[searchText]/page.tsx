@@ -9,6 +9,21 @@ type Props = {
   };
 };
 
+export async function generateMetadata({ params: { searchText } }: Props) {
+  const wikiData: Promise<SearchResult> = getWikiResults(searchText);
+  const data = await wikiData;
+  const displayTerm = searchText.replaceAll("%20", " ");
+  if (!data?.query?.pages) {
+    return {
+      title: `${displayTerm} not found!`,
+    };
+  }
+  return {
+    title: displayTerm,
+    description: `search results for ${displayTerm}`,
+  };
+}
+
 export default async function SearchResult({ params: { searchText } }: Props) {
   const wikiData: Promise<SearchResult> = getWikiResults(searchText);
   const data = await wikiData;
@@ -16,9 +31,12 @@ export default async function SearchResult({ params: { searchText } }: Props) {
   const content = (
     <section className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-2">
       {results
-        ? Object.values(results).map((result) => {
+        ? Object.values(results).map((result, index) => {
             return (
-              <div className="__wiki_item border-2 p-3 rounded bg-slate-800">
+              <div
+                key={index}
+                className="__wiki_item border-2 p-3 rounded bg-slate-800"
+              >
                 <img src={result.thumbnail?.source} alt="" />
                 <p>{result.title}</p>
               </div>
